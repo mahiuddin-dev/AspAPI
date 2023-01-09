@@ -23,5 +23,21 @@ namespace AspAPI.Controllers
             return posts;  
         }
 
+        [HttpPost]
+        public Post Add(Post post)
+        {   
+            post.CreateDate = DateTime.Now;
+            _dbContext.Posts.Add(post);
+            bool isSaved = _dbContext.SaveChanges() > 0;
+            if (isSaved)
+            {
+                return post;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
     }
 }
